@@ -1,0 +1,153 @@
+## `createFormAction`
+
+```js
+// action.ts
+import { createFormAction } from 'better-react-server-actions';
+export default createFormAction(config);
+```
+
+### Config
+* `input`: [zod-form-data](https://www.npmjs.com/package/zod-form-data) schema for validating formData
+* `action`: a function that is called when action is triggered if zod validation passes
+* `handleServerError`: *(optional)* return a custom error message when `action` throws
+
+#### `config.input`
+
+[zod-form-data](https://www.npmjs.com/package/zod-form-data) schema for validating formData.
+
+
+```js {5-7}
+import { createFormAction } from 'better-react-server-actions';
+import * as zfd from 'zod-form-data';
+
+export const formAction = createFormAction({
+  input: zfd.formData({
+    email: zfd.text(),
+  }),
+});
+```
+
+#### `config.action`
+
+Function that is called when action is triggered if zod validation passes.
+
+```js {4-6}
+import { createFormAction } from 'better-react-server-actions';
+
+export const formAction = createFormAction({
+  action: async (state) => {
+    // call api, access db directly, set cookies, throw errors, etc.
+  },
+});
+```
+
+#### `config.handleServerError` *(optional)*
+
+Return a custom error message when `action` throws. 
+This is great for mapping verbose database errors to user-friendly messages.
+
+```js {7-11}
+import { createFormAction } from 'better-react-server-actions';
+
+export const formAction = createFormAction({
+  action: async (state) => {
+    throw new Error('Database error');
+  },
+  handleServerError: (error) => {
+    if (error.message === 'Database error') {
+      return 'Custom error message';
+    }
+  },
+});
+```
+
+
+## Combine with `useActionState`
+
+`useActionState` is a React hook that extends Server Actions by adding state, making them more interactive. 
+However, it still enables the form to be submitted even before JavaScript is fully loaded.
+
+```js {7}
+"use client";
+
+import formAction from './action.ts';
+import { useActionState } from 'react'; // React 19+ required
+
+function MyComponent() {
+  const [state, action] = useActionState(formAction, {});
+  return <form action={action}>...</form>;
+}
+```
+
+### State
+
+State is the first element returned from `useActionState`.
+
+* `errors?.formErrors`: an array of strings populated if `action` throws [(details)](#stateerrorsformerrors)
+* `errors?.fieldErrors`: an object of validation errors for each form field [(details)](#stateerrorsfielderrors)
+
+#### `state.errors.formErrors`
+```js {7}
+"user server";
+
+import { createFormAction } from 'better-react-server-actions';
+
+export const formAction = createFormAction({
+  action: (state) => {
+    throw new Error('Server error');
+  }
+});
+```
+
+```js {10-12}
+"use client";
+
+import formAction from './action.ts';
+import { useActionState } from 'react'; // React 19+ required
+
+function Page() {
+  const [state, action] = useActionState(formAction, {});
+  return (
+    <form action={action}>
+      {state.errors?.formErrors?.map((error) => (
+        <div key={error}>{error}</div>
+      ))}
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+#### `state.errors.fieldErrors`
+```js {7-9}
+"user server";
+
+import { createFormAction } from 'better-react-server-actions';
+import * as zfd from 'zod-form-data';
+
+export const formAction = createFormAction({
+  input: zfd.formData({
+    email: zfd.text(),
+  }),
+});
+```
+
+```js {11-13}
+"use client";
+
+import formAction from './action.ts';
+import { useActionState } from 'react'; // React 19+ required
+
+function Page() {
+  const [state, action] = useActionState(formAction, {});
+  return (
+    <form action={action}>
+      <input name="email" />
+      {state.errors?.fieldErrors?.email?.map((error) => (
+        <div key={error}>{error}</div>
+      ))
+      <button type="submit">Subscribe</button>
+    </form>
+  );
+}
+```

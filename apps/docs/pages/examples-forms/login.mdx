@@ -1,0 +1,143 @@
+import { Callout, Tabs, Tab } from 'nextra-theme-docs'
+
+# Login example
+
+```js
+"use server";
+
+import { createFormAction } from 'better-react-server-actions';
+import * as zdf from 'zod-form-data';
+import z from 'zod';
+import { redirect } from 'next/navigation';
+
+const EMAIL = 'admin@example.com';
+const PASSWORD = 'password';
+
+export const login = createFormAction({
+  input: zdf.formData({
+    email: z.string().email(),
+    password: zdf.text(),
+  }),
+  action: async (state, { email, password }) => {
+
+    if (email !== EMAIL || password !== PASSWORD) {
+      throw new Error('Invalid email or password');
+    }
+
+    redirect('/examples/success')
+  }
+});
+
+```
+
+<Tabs items={['unstyled','tailwind']}>
+  <Tab>
+    ```js
+    "use client";
+
+    import { useActionState } from 'react';
+    import { login } from './action';
+
+    export default function Page() {
+      const [state, action] = useActionState(login, {});
+
+      const fieldErrors = state.errors?.fieldErrors;
+
+      return (
+        <form action={action}>
+          <h1>Login</h1>
+
+          {state.errors?.formErrors && (
+            <span>
+              {state.errors.formErrors.join(', ')}
+            </span>
+          )}
+
+          <label htmlFor="email">Email:</label>
+          <input id="email" name="email" />
+          {fieldErrors?.email && (
+            <span>
+              {fieldErrors.email.join(', ')}
+            </span>
+          )}
+
+          <label htmlFor="password">Password:</label>
+          <input id="password" name="password" type="password" />
+          {fieldErrors?.password && (
+            <span>
+             {fieldErrors.password.join(', ')}
+            </span>
+          )}
+
+          <button>
+            Login
+          </button>
+
+        </form>
+      )
+    }
+    ```
+  </Tab>
+  <Tab>
+    ```js
+    "use client";
+
+    import { useActionState } from 'react';
+    import { login } from './action';
+
+    export default function Page() {
+      const [state, action] = useActionState(login, {});
+
+      return (
+        <form 
+          action={action} 
+          className="flex flex-col gap-4"
+        >
+          <h1 className="text-3xl font-black">Login</h1>
+
+          {state.errors?.formErrors && (
+            <span className="text-red-500">
+              {state.errors.formErrors.join(', ')}
+            </span>
+          )}
+
+          <div className="flex flex-col space-y-1">
+            <label htmlFor="email">Email:</label>
+            <input 
+              id="email" 
+              name="email" 
+              className="border p-1" 
+            />
+            {fieldErrors?.email && (
+              <span className="text-red-500 text-sm">
+                {fieldErrors.email.join(', ')}
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-col space-y-1">
+            <label htmlFor="password">Password:</label>
+            <input 
+              id="password" 
+              name="password" 
+              className="border p-1" 
+            />
+            {fieldErrors?.password && (
+              <span className="text-red-500 text-sm">
+                {fieldErrors.password.join(', ')}
+              </span>
+            )}
+          </div>
+
+          <button className="bg-gray-300 p-1">
+            Login
+          </button>
+
+        </form>
+      )
+    }
+    ```
+  </Tab>
+</Tabs>
+
+

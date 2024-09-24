@@ -76,7 +76,7 @@ export function reconstructFormDataFromObject(data: object) {
   return new ReadonlyFormData(data);
 }
 
-export function getPreviousFormDataFromState(state: Record<any, any>) {
+export function getFormDataFromState(state: Record<any, any>) {
   const formData = typeof state[config.SECRET_FORM_DATA_KEY] === 'object' ? state[config.SECRET_FORM_DATA_KEY] as object : {};
   return reconstructFormDataFromObject(formData);
 }

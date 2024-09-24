@@ -1,0 +1,37 @@
+import { Callout, Tabs, Tab } from 'nextra-theme-docs'
+
+# Getting Started
+
+### Why Use This Library?
+
+* Server action validation with [`zod-form-data`](https://www.npmjs.com/package/zod-form-data)
+* Server error handling
+* Amazing TypeScript DX
+* Doesn't break [`useActionState` progressive enhancement](https://react.dev/reference/rsc/server-actions#progressive-enhancement-with-useactionstate)
+* No dependencies other then `zod-form-data`
+
+### Why React 19+ is required
+
+This library is designed to enhance `useServerAction`, which requires React 19. Without that, you really won't get much benefit from this library.
+
+## Installation
+
+Ensure you have React 19 and Next.js 15 setup ([instructions](https://nextjs.org/blog/next-15-rc)).
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tab>
+    ```bash
+    pnpm add better-react-server-actions zod-form-data
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    npm install -S better-react-server-actions zod-form-data -->
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    yarn add better-react-server-actions zod-form-data
+    ```
+  </Tab>
+</Tabs>
