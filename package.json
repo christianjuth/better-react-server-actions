@@ -1,0 +1,40 @@
+{
+  "name": "better-react-server-actions",
+  "version": "0.0.0-alpha1",
+  "description": "Better React Server Actions with Zod validation",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "src/index.ts",
+  "files": [
+    "cjs",
+    "esm",
+    "src",
+    "README.md"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf ./esm/* || true  && rm -rf ./cjs/* || true",
+    "build:esm": "tsc --outDir esm --module es6",
+    "build:cjs": "tsc --outDir cjs --module commonjs",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "test": "vitest"
+  },
+  "author": "Christian Juth",
+  "license": "MIT",
+  "dependencies": {
+    "zod-form-data": "^2"
+  },
+  "devDependencies": {
+    "@vitest/ui": "^2.1.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1",
+    "zod": "^3.23.8",
+    "zod-form-data": "^2.0.2"
+  },
+  "peerDependencies": {
+    "zod-form-data": "^2"
+  }
+}

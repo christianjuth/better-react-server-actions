@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "downlevelIteration": true,
+    "target": "ES6",
+    "moduleResolution": "node",
+  },
+  "files": ["src/index.ts"],
+}
