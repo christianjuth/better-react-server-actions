@@ -19,7 +19,7 @@ export default createFormAction(config);
 
 ```js {5-7}
 import { createFormAction } from 'better-react-server-actions';
-import { zdf } from 'zod-form-data';
+import { zfd } from 'zod-form-data';
 
 export const formAction = createFormAction({
   formDataSchema: zfd.formData({
@@ -147,7 +147,7 @@ An object of validation errors for each form field.
 "user server";
 
 import { createFormAction } from 'better-react-server-actions';
-import { zdf } from 'zod-form-data';
+import { zfd } from 'zod-form-data';
 
 export const formAction = createFormAction({
   formDataSchema: zfd.formData({

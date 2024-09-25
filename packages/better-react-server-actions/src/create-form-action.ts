@@ -52,7 +52,7 @@ export function createFormAction<
    * zod-form-data schema for validating formData
    *
    * @example
-   * import { zdf } from 'zod-form-data';
+   * import { zfd } from 'zod-form-data';
    * createFormAction({
    *   formDataSchema: zfd.formData({
    *     email: zfd.text(),
@@ -99,8 +99,8 @@ export function createFormAction<
    */
   formatServerError?: (err: any) => Promise<string | undefined | void>,
 }) {
-  return async function (state: ParsedState, formData: FormData): Promise<ExtendState<ParsedState, StateSchema, FormDataSchema>> {
-    const searliableFormData = formDataToObject(formData);
+  return async function (state: ParsedState, formData?: FormData): Promise<ExtendState<ParsedState, StateSchema, FormDataSchema>> {
+    const searliableFormData = formData ? formDataToObject(formData) : undefined;
 
     const parsedForm = formDataSchema?.safeParse(formData);
 
