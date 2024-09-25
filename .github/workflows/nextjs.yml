@@ -61,8 +61,7 @@ jobs:
 
       - name: Build with Next.js
         working-directory: ./apps/docs
-        run: yarn next build
-
+        run: BASE_PATH=/better-react-server-actions yarn next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
