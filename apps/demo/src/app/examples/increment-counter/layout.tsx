@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer className="flex justify-center gap-10 underline">
         <a 
           className="text-blue-500"
-          href="https://github.com/christianjuth/better-react-server-actions/tree/main/apps/demo/src/app/examples/like-button" 
+          href="https://github.com/christianjuth/better-react-server-actions/tree/main/apps/demo/src/app/examples/increment-counter"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </a>
         <a 
           className="text-blue-500"
-          href="https://christianjuth.github.io/better-react-server-actions/examples/like-button" 
+          href="https://christianjuth.github.io/better-react-server-actions/examples/increment-counter" 
           target="_blank"
           rel="noopener noreferrer"
         >

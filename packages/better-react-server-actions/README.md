@@ -14,6 +14,8 @@ So you're like me and you love Server Actions, but you **need more Zod and TypeS
 
 This library is designed to enhance `useServerAction`, which requires React 19. Without that, you really won't get much benefit from this library.
 
+I have only tested with Next.js for now, but the goal is to make this work with React in general.
+
 ### Documentation
 
 See [christianjuth.github.io/better-react-server-actions](https://christianjuth.github.io/better-react-server-actions/).
