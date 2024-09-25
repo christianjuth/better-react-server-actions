@@ -33,7 +33,7 @@ function mapZodErrorsToObject<E extends z.ZodError<any>>(error: E) {
   }, {} as Record<string, string[]>);
 }
 
-export function createFormAction<
+export function createAction<
   StateSchema extends ReturnType<typeof z.object> | undefined = undefined,
   ParsedState = StateSchema extends ReturnType<typeof z.object>
     ? z.infer<StateSchema>
@@ -53,7 +53,7 @@ export function createFormAction<
    *
    * @example
    * import { zfd } from 'zod-form-data';
-   * createFormAction({
+   * createAction({
    *   formDataSchema: zfd.formData({
    *     email: zfd.text(),
    *   }),
@@ -66,7 +66,7 @@ export function createFormAction<
    *
    * @example
    * import { z } from 'zod';
-   * createFormAction({
+   * createAction({
    *   stateSchema: z.object({
    *     counter: z.number(),
    *   }),
@@ -81,7 +81,7 @@ export function createFormAction<
    * @returns {Promise<ParsedState>} The new state after the action has been processed.
    *
    * @example
-   * createFormAction({
+   * createAction({
    *   requestHandler: async (prevState, validatedFormData) => {
    *   },
    * });

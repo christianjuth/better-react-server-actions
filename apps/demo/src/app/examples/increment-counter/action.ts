@@ -1,9 +1,9 @@
 "use server";
  
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 import { z } from 'zod';
  
-export const incrementCounter = createFormAction({
+export const incrementCounter = createAction({
   stateSchema: z.object({
     count: z.number().min(0),
   }),

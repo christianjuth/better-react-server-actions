@@ -1,6 +1,6 @@
 "use server";
  
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 import { zfd } from 'zod-form-data';
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 const EMAIL = 'admin@example.com';
 const PASSWORD = 'password';
  
-export const login = createFormAction({
+export const login = createAction({
   formDataSchema: zfd.formData({
     email: z.string().email(),
     password: zfd.text(),

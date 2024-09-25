@@ -1,9 +1,9 @@
-## `createFormAction`
+## `createAction`
 
 ```js {3}
 // action.ts
-import { createFormAction } from 'better-react-server-actions';
-export default createFormAction(config);
+import { createAction } from 'better-react-server-actions';
+export default createAction(config);
 ```
 
 ### Config
@@ -18,10 +18,10 @@ export default createFormAction(config);
 
 
 ```js {5-7}
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 import { zfd } from 'zod-form-data';
 
-export const formAction = createFormAction({
+export const formAction = createAction({
   formDataSchema: zfd.formData({
     email: zfd.text(),
   }),
@@ -33,10 +33,10 @@ export const formAction = createFormAction({
 [zod](https://www.npmjs.com/package/zod) schema for validating state.
 
 ```js {5-7}
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 import { z } from 'zod';
 
-export const formAction = createFormAction({
+export const formAction = createAction({
   stateSchema: z.object({
     counter: z.number().min(0),
   }),
@@ -49,9 +49,9 @@ export const formAction = createFormAction({
 A function that is called when action is triggered if form data validation passes.
 
 ```js {4-6}
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 
-export const formAction = createFormAction({
+export const formAction = createAction({
   requestHandler: async (prevState, validatedFormData) => {
     // call api, access db directly, set cookies, throw errors, etc.
   },
@@ -64,9 +64,9 @@ Return a custom error message when `requestHandler` throws.
 This is great for mapping verbose database errors to user-friendly messages.
 
 ```js {7-11}
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 
-export const formAction = createFormAction({
+export const formAction = createAction({
   requestHandler: async (prevState, validatedFormData) => {
     throw new Error('Database error');
   },
@@ -111,9 +111,9 @@ An array of strings populated if `requestHandler` throws.
 ```js {7}
 "user server";
 
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 
-export const formAction = createFormAction({
+export const formAction = createAction({
   requestHandler: async (prevState, validatedFormData) => {
     throw new Error('Server error');
   }
@@ -146,10 +146,10 @@ An object of validation errors for each form field.
 ```js {7-9}
 "user server";
 
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 import { zfd } from 'zod-form-data';
 
-export const formAction = createFormAction({
+export const formAction = createAction({
   formDataSchema: zfd.formData({
     email: zfd.text(),
   }),
@@ -183,10 +183,10 @@ An object of validation errors for each state field.
 ```js {7-9}
 "user server";
 
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 import { z } from 'zod';
 
-export const formAction = createFormAction({
+export const formAction = createAction({
   stateSchema: z.object({
     counter: z.number().min(0),
   }),

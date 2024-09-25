@@ -1,5 +1,5 @@
 import { describe, test, expect, vitest } from 'vitest';
-import { createFormAction } from './create-form-action';
+import { createAction } from './create-form-action';
 import { zfd } from 'zod-form-data';
 import { z } from 'zod';
 
@@ -9,7 +9,7 @@ const INVALID_LOGIN_ERROR = 'Invalid username or password';
 
 function createLoginAction() {
   const fn = vitest.fn();
-  const login = createFormAction({
+  const login = createAction({
     formDataSchema: zfd.formData({
       username: zfd.text(),
       password: zfd.text(),
@@ -82,7 +82,7 @@ describe('create-form-action', () => {
     test('valid state update', async () => {
       
       const fn = vitest.fn();
-      const increment = createFormAction({
+      const increment = createAction({
         stateSchema: z.object({
           count: z.number().min(0),
         }),
@@ -101,7 +101,7 @@ describe('create-form-action', () => {
     test('invalid state update', async () => {
       
       const fn = vitest.fn();
-      const increment = createFormAction({
+      const increment = createAction({
         stateSchema: z.object({
           count: z.number().min(0),
         }),
@@ -120,7 +120,7 @@ describe('create-form-action', () => {
     test('toggle state', async () => {
       
       const fn = vitest.fn();
-      const increment = createFormAction({
+      const increment = createAction({
         stateSchema: z.object({
           value: z.boolean(),
         }),

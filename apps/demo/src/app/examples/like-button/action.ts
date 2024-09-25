@@ -1,9 +1,9 @@
 "use server";
  
-import { createFormAction } from 'better-react-server-actions';
+import { createAction } from 'better-react-server-actions';
 import { z } from 'zod';
  
-export const toggleLike = createFormAction({
+export const toggleLike = createAction({
   stateSchema: z.object({
     likeId: z.string().optional(),
   }),

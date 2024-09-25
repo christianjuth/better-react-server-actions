@@ -1,2 +1,2 @@
-export { createFormAction } from './create-form-action';
+export { createAction } from './create-form-action';
 export { getPreviousFormData } from './form-data';
