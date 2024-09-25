@@ -12,7 +12,7 @@ So you're like me and you love Server Actions, but you **need more Zod and TypeS
 
 ### Why React 19+ is required
 
-This library is designed to enhance `useServerAction`, which requires React 19. Without that, you really won't get much benefit from this library.
+This library is designed to enhance `useActionState`, which requires React 19. Without that, you really won't get much benefit from this library.
 
 I have only tested with Next.js for now, but the goal is to make this work with React in general.
 
