@@ -39,5 +39,22 @@
   "peerDependencies": {
     "zod": ">= 3.11.0",
     "zod-form-data": ">= 2.0.0"
-  }
+  },
+  "keywords": [
+    "react",
+    "next",
+    "nextjs",
+    "rsc",
+    "react server components",
+    "action",
+    "actions",
+    "react actions",
+    "next actions",
+    "server actions",
+    "zod",
+    "zod-form-data",
+    "validation",
+    "typescript",
+    "progressive enhancement"
+  ]
 }
