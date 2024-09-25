@@ -1,6 +1,6 @@
 import { Callout, Tabs, Tab } from 'nextra-theme-docs'
 
-# Let's create our first action!
+# Login Form Example
 
 In this example, we will create a simple login form that redirects to a success page if the email and password match.
 
@@ -25,7 +25,7 @@ export const login = createFormAction({
       throw new Error('Invalid email or password');
     }
 
-    redirect('/examples/success')
+    redirect('/')
   }
 });
 ```

@@ -1,0 +1,82 @@
+import { Callout, Tabs, Tab } from 'nextra-theme-docs'
+
+# Like Button Example
+
+In this example, we will create a simple like button that toggles between liking and unliking a post.
+ 
+```js
+"use server";
+
+import { createFormAction } from 'better-react-server-actions';
+import { z } from 'zod';
+
+export const login = createFormAction({
+  stateSchema: z.object({
+    likeId: z.string().optional(),
+  }),
+  requestHandler: async ({ likeId }) => {
+    // Check if user is logged in
+    // and redirect to login page if not
+
+    if (likeId) {
+      // Delete like via api
+      return {
+        likeId: undefined,
+      }
+    } else {
+      // Create like via api
+      const newLikeId = 'new-like-id';
+      return {
+        likeId: newLikeId,
+      }
+    }
+  }
+});
+```
+
+
+<Tabs items={['Unstyled','Tailwind']}>
+  <Tab>
+    ```js
+    "use client";
+     
+    import { useActionState } from 'react';
+    import { toggleLike } from './action';
+     
+    export default function Page() {
+      const [state, action] = useActionState(toggleLike, {});
+     
+      return (
+        <form action={action}>
+          <button>
+            {state.likeId ? 'Unlike' : 'Like'}
+          </button>
+        </form>
+      )
+    }
+    ```
+  </Tab>
+  <Tab>
+    ```js
+    "use client";
+     
+    import { useActionState } from 'react';
+    import { toggleLike } from './action';
+     
+    export default function Page() {
+      const [state, action] = useActionState(toggleLike, {});
+     
+      return (
+        <form 
+          action={action} 
+          className="flex flex-col gap-4"
+        >
+          <button className="bg-gray-300 p-1">
+            {state.likeId ? 'Unlike' : 'Like'}
+          </button>
+        </form>
+      )
+    }
+    ```
+  </Tab>
+</Tabs>

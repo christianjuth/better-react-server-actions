@@ -1,6 +1,6 @@
 import { describe, test, expect, vitest } from 'vitest';
 import { createFormAction } from './create-form-action';
-import * as zfd from 'zod-form-data';
+import { zdf } from 'zod-form-data';
 
 const USERNAME = 'admin';
 const PASSWORD = 'password';

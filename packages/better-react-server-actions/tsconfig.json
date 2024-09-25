@@ -4,6 +4,7 @@
     "downlevelIteration": true,
     "target": "ES6",
     "moduleResolution": "node",
+    "strict": true,
   },
   "files": ["src/index.ts"],
 }

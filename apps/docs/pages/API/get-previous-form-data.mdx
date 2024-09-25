@@ -1,0 +1,86 @@
+## `getPreviousFormData`
+
+The `getPreviousFormData` function retrieves the form data from the most recent form submission, making it easy to prepopulate fields with the user's previous input when a form is re-rendered. This is especially useful when handling validation errors, where you want to preserve the user's input across submissions.
+
+```jsx {6}
+import { login } from './action';
+import { getPreviousFormData } from 'better-react-server-actions';
+ 
+export default function Page() {
+  const [state, action] = useActionState(login, {});
+  const formData = getPreviousFormData(state);  
+  // ...
+}
+```
+
+### State
+
+The `state` passed to `getPreviousFormData` is the first value returned from `useActionState`. This state contains the information about the form and its errors, and `getPreviousFormData` extracts the previously submitted form data.
+
+> **Note:** This works only if the action was created using createFormAction. If used with other actions, this will not work.
+
+### Returns
+`getPreviousFormData` returns a readonly `FormData` instance, containing the form data from the most recent submission. You can use `formData.get()` or `formData.getAll()` to retrieve individual fields by name.
+
+### Practical Usage
+* **Form Re-rendering After Validation Errors:** When the form encounters validation errors and needs to be re-rendered, you can use this function to prepopulate form fields with the user's previous input.
+* **Handling Multi-step Forms:** In multi-step forms, this can help carry over previously entered values between steps without the need for manual state management.
+
+## Example
+
+```jsx
+"use client";
+
+import { useActionState } from 'react';
+import { login } from './action';
+import { getPreviousFormData } from 'better-react-server-actions';
+
+export default function Page() {
+  const [state, action] = useActionState(login, {});
+
+  const formData = getPreviousFormData(state);  
+
+  const formErrors = state.errors?.formErrors;
+
+  return (
+    <form action={action}>
+      <h1>Login</h1>
+
+      {state.errors?.actionErrors && (
+        <span>
+          {state.errors.actionErrors.join(', ')}
+        </span>
+      )}
+
+      <label htmlFor="email">Email:</label>
+      <input 
+        id="email" 
+        name="email" 
+        defaultValue={formData.get('email') ?? undefined}
+      />
+      {formErrors?.email && (
+        <span>
+          {formErrors.email.join(', ')}
+        </span>
+      )}
+
+      <label htmlFor="password">Password:</label>
+      <input 
+        id="password" 
+        name="password" 
+        type="password" 
+        defaultValue={formData.get('password') ?? undefined}
+      />
+      {formErrors?.password && (
+        <span>
+          {formErrors.password.join(', ')}
+        </span>
+      )}
+
+      <button>
+        Login
+      </button>
+    </form>
+  )
+}
+```

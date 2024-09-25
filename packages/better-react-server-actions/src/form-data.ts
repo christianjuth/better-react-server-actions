@@ -3,7 +3,7 @@ import * as config from './config';
 class ReadonlyFormData implements Omit<FormData, 'append' | 'set' | 'forEach' | 'delete'> {
   data: Record<string, string[]> = {}
 
-  constructor(data: object = {}) {
+  constructor(data: Record<string, any> = {}) {
     for (const key in data) {
       if (Array.isArray(data[key])) {
         this.data[key] = data[key].filter(v => typeof v === 'string')
@@ -76,7 +76,7 @@ export function reconstructFormDataFromObject(data: object) {
   return new ReadonlyFormData(data);
 }
 
-export function getFormDataFromState(state: Record<any, any>) {
+export function getPreviousFormData(state: Record<any, any>) {
   const formData = typeof state[config.SECRET_FORM_DATA_KEY] === 'object' ? state[config.SECRET_FORM_DATA_KEY] as object : {};
   return reconstructFormDataFromObject(formData);
 }

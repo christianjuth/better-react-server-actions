@@ -1,0 +1,76 @@
+import { Callout, Tabs, Tab } from 'nextra-theme-docs'
+
+# Increment Counter Example 
+
+In this example, we will create a simple counter that increments by one each time a button is clicked.
+
+```js
+"use server";
+
+import { createFormAction } from 'better-react-server-actions';
+import { z } from 'zod';
+
+export const incrementCounter = createFormAction({
+  stateSchema: z.object({
+    count: z.number().min(0),
+  }),
+  requestHandler: async ({ count }) => {
+    return {
+      count: count + 1,
+    }
+  }
+});
+```
+
+
+<Tabs items={['Unstyled','Tailwind']}>
+  <Tab>
+    ```js
+    "use client";
+     
+    import { useActionState } from 'react';
+    import { incrementCounter } from './action';
+     
+    export default function Page() {
+      const [state, action] = useActionState(incrementCounter, {
+        count: 0,
+      });
+     
+      return (
+        <form action={action}>
+          <span>Count: {state.count}</span>
+          <button>
+            Increment
+          </button>
+        </form>
+      )
+    }
+    ```
+  </Tab>
+  <Tab>
+    ```js
+    "use client";
+     
+    import { useActionState } from 'react';
+    import { incrementCounter } from './action';
+     
+    export default function Page() {
+      const [state, action] = useActionState(incrementCounter, {
+        count: 0,
+      });
+     
+      return (
+        <form 
+          action={action} 
+          className="flex flex-col gap-4"
+        >
+          <span>Count: {state.count}</span>
+          <button className="bg-gray-300 p-1">
+            Increment
+          </button>
+        </form>
+      )
+    }
+    ```
+  </Tab>
+</Tabs>

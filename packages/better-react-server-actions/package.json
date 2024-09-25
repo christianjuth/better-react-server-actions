@@ -26,9 +26,9 @@
   },
   "author": "Christian Juth",
   "license": "MIT",
-  "dependencies": {
-    "zod-form-data": "^2"
-  },
+  "repository": "christianjuth/better-react-server-actions",
+  "homepage": "https://christianjuth.github.io/better-react-server-actions",
+  "bugs": "https://github.com/christianjuth/better-react-server-actions/issues",
   "devDependencies": {
     "@vitest/ui": "^2.1.1",
     "typescript": "^5.6.2",
@@ -37,6 +37,7 @@
     "zod-form-data": "^2.0.2"
   },
   "peerDependencies": {
-    "zod-form-data": "^2"
+    "zod": ">= 3.11.0",
+    "zod-form-data": ">= 2.0.0"
   }
 }
