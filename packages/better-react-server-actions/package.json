@@ -1,6 +1,6 @@
 {
   "name": "better-react-server-actions",
-  "version": "0.0.0-alpha1",
+  "version": "0.0.0-alpha2",
   "description": "Better React Server Actions with Zod validation",
   "main": "cjs/index.js",
   "module": "esm/index.js",
