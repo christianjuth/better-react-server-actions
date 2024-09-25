@@ -1,6 +1,6 @@
 import * as config from './config';
 
-class ReadonlyFormData implements Omit<FormData, 'append' | 'set' | 'forEach' | 'delete'> {
+class ReadonlyFormData {
   data: Record<string, string[]> = {}
 
   constructor(data: Record<string, any> = {}) {
