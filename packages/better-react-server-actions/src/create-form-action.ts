@@ -76,8 +76,9 @@ export function createFormAction<
   /**
    * A function that is called when action is triggered if form data validation passes.
    *
-   * @param prevState - The previous state if you defined stateSchema
-   * @param validatedFormData - The validated form data if you defined formDataSchema
+   * @param {ParsedState} prevState - The previous state, inferred from the state schema.
+   * @param {ParsedFormData} formData - The validated form data, inferred from the form schema.
+   * @returns {Promise<ParsedState>} The new state after the action has been processed.
    *
    * @example
    * createFormAction({
@@ -89,6 +90,13 @@ export function createFormAction<
     prevState: ParsedState, 
     formData: ParsedFormData
   ) => Promise<ParsedState>
+  /**
+   * Return a custom error message when `requestHandler` throws. 
+   * This is great for mapping verbose database errors to user-friendly messages.
+   *
+   * @param {any} err - The error thrown by `requestHandler`.
+   * @returns {Promise<string | undefined | void>} The error message to display to the user.
+   */
   formatServerError?: (err: any) => Promise<string | undefined | void>,
 }) {
   return async function (state: ParsedState, formData: FormData): Promise<ExtendState<ParsedState, StateSchema, FormDataSchema>> {

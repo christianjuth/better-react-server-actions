@@ -18,6 +18,6 @@ export const login = createFormAction({
       throw new Error('Invalid email or password');
     }
  
-    redirect('/examples/success')
+    redirect('/examples/success');
   }
 });

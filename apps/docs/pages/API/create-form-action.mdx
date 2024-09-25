@@ -10,7 +10,7 @@ export default createFormAction(config);
 * `formDataSchema`: *(optional)* [zod-form-data](https://www.npmjs.com/package/zod-form-data) schema for validating formData [(details)](#configformdataschema-optional)
 * `stateSchema`: *(optional)* [zod](https://www.npmjs.com/package/zod) schema for validating state [(details)](#configstateschema-optional)
 * `requestHandler`: a function that is called when action is triggered if form data validation passes [(details)](#configrequesthandler)
-* `formatServerError`: *(optional)* return a custom error message when `action` throws [(details)](#configformatservererror-optional)
+* `formatServerError`: *(optional)* return a custom error message when `requestHandler` throws [(details)](#configformatservererror-optional)
 
 #### `config.formDataSchema` *(optional)*
 
@@ -60,7 +60,7 @@ export const formAction = createFormAction({
 
 #### `config.formatServerError` *(optional)*
 
-Return a custom error message when `action` throws. 
+Return a custom error message when `requestHandler` throws. 
 This is great for mapping verbose database errors to user-friendly messages.
 
 ```js {7-11}

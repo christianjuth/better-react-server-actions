@@ -22,6 +22,9 @@ See [christianjuth.github.io/better-react-server-actions](https://christianjuth.
 
 #### Login Form Example
 
+* [Try it](https://better-react-server-actions-demo.vercel.app/examples/login-form) 
+* [View in docs](https://christianjuth.github.io/better-react-server-actions/examples/login-form)
+
 ```js
 "use server";
  
@@ -103,6 +106,9 @@ export default function Page() {
 
 #### Like Button Example
 
+* [Try it](https://better-react-server-actions-demo.vercel.app/examples/like-button)
+* [View in docs](https://christianjuth.github.io/better-react-server-actions/examples/like-button)
+
 ```js
 "use server";
  
@@ -153,6 +159,10 @@ export default function Page() {
 ```
 
 #### Increment Counter Example
+
+* [Try it](https://better-react-server-actions-demo.vercel.app/examples/increment-counter)
+* [View in docs](https://christianjuth.github.io/better-react-server-actions/examples/increment-counter)
+
 ```js
 "use server";
  

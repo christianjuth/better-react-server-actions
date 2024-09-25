@@ -25,7 +25,7 @@ export const login = createFormAction({
       throw new Error('Invalid email or password');
     }
 
-    redirect('/examples/success')
+    redirect('/')
   }
 });
 ```
@@ -150,7 +150,7 @@ export const login = createFormAction({
   </Tab>
 </Tabs>
 
-## Advanced
+## Making it better
 
 We can prevent form data from clearing on sumit. Even if JavaScript is disabled, and React
 falls back to an html form submission, the form state will still be preserved!
@@ -283,3 +283,12 @@ falls back to an html form submission, the form state will still be preserved!
     ```
   </Tab>
 </Tabs>
+
+## Try it out
+
+[Open in new a tab](https://better-react-server-actions-demo.vercel.app/examples/login-form)
+
+<iframe 
+  src="https://better-react-server-actions-demo.vercel.app/examples/login-form" 
+  style={{ height: 600, width: '100%' }}
+/>
