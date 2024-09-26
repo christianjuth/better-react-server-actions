@@ -1,5 +1,5 @@
 import { describe, test, expect, vitest } from 'vitest';
-import { createActionWithState } from './create-form-action';
+import { createActionWithState } from './create-action-with-state';
 import { zfd } from 'zod-form-data';
 import { z } from 'zod';
 
@@ -93,7 +93,7 @@ describe('create-form-action', () => {
         }
       });
 
-      const result = await increment({ count: 0 });
+      const result = await increment({ count: 0 }, new FormData());
 
       expect(result.count).toBe(1);
     });
@@ -111,7 +111,7 @@ describe('create-form-action', () => {
         }
       });
 
-      const result = await increment({ count: 0 });
+      const result = await increment({ count: 0 }, new FormData());
 
       expect(result.count).toBe(0);
       expect(result.errors?.stateErrors).toHaveProperty('count');
@@ -131,9 +131,9 @@ describe('create-form-action', () => {
         }
       });
 
-      let result = await increment({ value: false });
+      let result = await increment({ value: false }, new FormData());
       expect(result.value).toBe(true);
-      result = await increment(result);
+      result = await increment(result, new FormData());
       expect(result.value).toBe(false);
     });
 

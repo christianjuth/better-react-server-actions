@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
-    "lib": ["esnext", "dom"],
-    "downlevelIteration": true,
-    "target": "ES6",
-    "moduleResolution": "node",
+    "outDir": "./dist/esm",
+    "declaration": true,
     "strict": true,
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "files": ["src/index.ts"],
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

@@ -98,8 +98,8 @@ export function createActionWithState<
    */
   formatServerError?: (err: any) => Promise<string | undefined | void>,
 }) {
-  return async function (state: ParsedState, formData?: FormData): Promise<ExtendState<ParsedState, ParsedFormData>> {
-    const searliableFormData = formData ? formDataToObject(formData) : undefined;
+  return async function (state: ParsedState, formData: FormData): Promise<ExtendState<ParsedState, ParsedFormData>> {
+    const searliableFormData = formDataToObject(formData);
 
     const parsedForm = formDataSchema?.safeParse(formData);
 

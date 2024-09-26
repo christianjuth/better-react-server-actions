@@ -1,4 +1,5 @@
 import * as config from './config';
+import { isString } from './utils';
 
 class ReadonlyFormData {
   data: Record<string, string[]> = {}
@@ -6,7 +7,7 @@ class ReadonlyFormData {
   constructor(data: Record<string, any> = {}) {
     for (const key in data) {
       if (Array.isArray(data[key])) {
-        this.data[key] = data[key].filter(v => typeof v === 'string')
+        this.data[key] = data[key].filter(isString);
       }
     }
   }
@@ -65,7 +66,7 @@ export function formDataToObject(formData: FormData) {
 
   formData.forEach((_, key) => {
     if (!key.startsWith('$')) {
-      output[key] = formData.getAll(key).filter(v => typeof v === 'string')
+      output[key] = formData.getAll(key).filter(isString);
     }
   });
 
