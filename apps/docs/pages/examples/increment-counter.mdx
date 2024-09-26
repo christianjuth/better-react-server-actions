@@ -7,10 +7,10 @@ In this example, we will create a simple counter that increments by one each tim
 ```js
 "use server";
 
-import { createAction } from 'better-react-server-actions';
+import { createActionWithState } from 'better-react-server-actions';
 import { z } from 'zod';
 
-export const incrementCounter = createAction({
+export const incrementCounter = createActionWithState({
   stateSchema: z.object({
     count: z.number().min(0),
   }),

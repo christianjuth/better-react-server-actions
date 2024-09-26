@@ -1,5 +1,6 @@
 import { FaReact } from "react-icons/fa";
 import { ImNpm } from "react-icons/im";
+import Fav from "./public/favicon.ico"
 
 export default {
   logo: <>
@@ -15,5 +16,19 @@ export default {
         <ImNpm style={{ color: '#d60c0c', height: '2rem', width: '2rem', stroke: 'white', position: 'relative' }} />
       </div>
     )
+  },
+  footer: {
+    text: (
+      <span>
+        MIT {new Date().getFullYear()} ©{' '}
+        Christian Juth
+      </span>
+    )
+  },
+  faviconGlyph: "🚀",
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s - Better React Server Actions',
+    }
   }
 }

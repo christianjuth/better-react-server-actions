@@ -17,7 +17,7 @@ export default function Page() {
 
 The `state` passed to `getPreviousFormData` is the first value returned from `useActionState`. This state contains the information about the form and its errors, and `getPreviousFormData` extracts the previously submitted form data.
 
-> **Note:** This works only if the action was created using createAction. If used with other actions, this will not work.
+> **Note:** This works only if the action was created using createActionWithState. If used with other actions, this will not work.
 
 ### Returns
 `getPreviousFormData` returns a readonly `FormData` instance, containing the form data from the most recent submission. You can use `formData.get()` or `formData.getAll()` to retrieve individual fields by name.

@@ -7,10 +7,10 @@ In this example, we will create a simple like button that toggles between liking
 ```js
 "use server";
 
-import { createAction } from 'better-react-server-actions';
+import { createActionWithState } from 'better-react-server-actions';
 import { z } from 'zod';
 
-export const login = createAction({
+export const login = createActionWithState({
   stateSchema: z.object({
     likeId: z.string().optional(),
   }),

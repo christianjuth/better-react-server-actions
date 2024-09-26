@@ -5,19 +5,18 @@ import * as errUtils from './error'
 import * as config from './config'
 
 type ExtendState<
-  State,
-  StateSchema extends ReturnType<typeof z.object> | undefined,
-  FormDataSchema extends ReturnType<typeof zfd.formData> | undefined
-> = State & { 
+  ParsedState extends z.infer<any> | {},
+  ParsedFormData extends z.infer<any> | {}
+> = ParsedState & { 
   errors?: {
     actionErrors: string[]
     stateErrors: {
-      [K in keyof StateSchema]?: string[]
+      [K in keyof ParsedState]?: string[]
     } & {
       [key: string]: string[]
     }
     formErrors: {
-      [K in keyof FormDataSchema]?: string[]
+      [K in keyof ParsedFormData]?: string[]
     } & {
       [key: string]: string[]
     }
@@ -33,7 +32,7 @@ function mapZodErrorsToObject<E extends z.ZodError<any>>(error: E) {
   }, {} as Record<string, string[]>);
 }
 
-export function createAction<
+export function createActionWithState<
   StateSchema extends ReturnType<typeof z.object> | undefined = undefined,
   ParsedState = StateSchema extends ReturnType<typeof z.object>
     ? z.infer<StateSchema>
@@ -53,7 +52,7 @@ export function createAction<
    *
    * @example
    * import { zfd } from 'zod-form-data';
-   * createAction({
+   * createActionWithState({
    *   formDataSchema: zfd.formData({
    *     email: zfd.text(),
    *   }),
@@ -66,7 +65,7 @@ export function createAction<
    *
    * @example
    * import { z } from 'zod';
-   * createAction({
+   * createActionWithState({
    *   stateSchema: z.object({
    *     counter: z.number(),
    *   }),
@@ -81,7 +80,7 @@ export function createAction<
    * @returns {Promise<ParsedState>} The new state after the action has been processed.
    *
    * @example
-   * createAction({
+   * createActionWithState({
    *   requestHandler: async (prevState, validatedFormData) => {
    *   },
    * });
@@ -99,7 +98,7 @@ export function createAction<
    */
   formatServerError?: (err: any) => Promise<string | undefined | void>,
 }) {
-  return async function (state: ParsedState, formData?: FormData): Promise<ExtendState<ParsedState, StateSchema, FormDataSchema>> {
+  return async function (state: ParsedState, formData?: FormData): Promise<ExtendState<ParsedState, ParsedFormData>> {
     const searliableFormData = formData ? formDataToObject(formData) : undefined;
 
     const parsedForm = formDataSchema?.safeParse(formData);

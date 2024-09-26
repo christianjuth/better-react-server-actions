@@ -30,7 +30,7 @@ See [christianjuth.github.io/better-react-server-actions](https://christianjuth.
 ```js
 "use server";
  
-import { createAction } from 'better-react-server-actions';
+import { createActionWithState } from 'better-react-server-actions';
 import { zfd } from 'zod-form-data';
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
@@ -38,7 +38,7 @@ import { redirect } from 'next/navigation';
 const EMAIL = 'admin@example.com';
 const PASSWORD = 'password';
  
-export const login = createAction({
+export const login = createActionWithState({
   formDataSchema: zfd.formData({
     email: z.string().email(),
     password: zfd.text(),
@@ -114,10 +114,10 @@ export default function Page() {
 ```js
 "use server";
  
-import { createAction } from 'better-react-server-actions';
+import { createActionWithState } from 'better-react-server-actions';
 import { z } from 'zod';
  
-export const login = createAction({
+export const login = createActionWithState({
   stateSchema: z.object({
     likeId: z.string().optional(),
   }),
@@ -168,10 +168,10 @@ export default function Page() {
 ```js
 "use server";
  
-import { createAction } from 'better-react-server-actions';
+import { createActionWithState } from 'better-react-server-actions';
 import { z } from 'zod';
  
-export const incrementCounter = createAction({
+export const incrementCounter = createActionWithState({
   stateSchema: z.object({
     count: z.number().min(0),
   }),

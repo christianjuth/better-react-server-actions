@@ -4,6 +4,9 @@ const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.jsx',
   defaultShowCopyCode: true,
+  flexsearch: {
+    codeblocks: false,
+  },
 });
 
 /** @type {import('next').NextConfig} */

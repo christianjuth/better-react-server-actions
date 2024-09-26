@@ -1,9 +1,9 @@
 "use server";
  
-import { createAction } from 'better-react-server-actions';
+import { createActionWithState } from 'better-react-server-actions';
 import { z } from 'zod';
  
-export const incrementCounter = createAction({
+export const incrementCounter = createActionWithState({
   stateSchema: z.object({
     count: z.number().min(0),
   }),
